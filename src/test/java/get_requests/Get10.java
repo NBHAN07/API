@@ -50,7 +50,7 @@ public class Get10 extends GoRestBaseUrl {
         //3. Step: Send the request and Get the Response
         Response response = given().spec(spec).when().get("/{first}/{second}");
 
-        Map<String, Object> actualDataMap = response.as(HashMap.class);//De-Serialization==> Json formatından Java Objesine çevirme
+        Map<String, Object> actualDataMap = response.as(HashMap.class);//De-Serialization==> Json formatından Java Objesine çevirme !!!
 
         //4. Step: Do Assertion
         assertEquals(expectedData.get("meta"),actualDataMap.get("meta"));
