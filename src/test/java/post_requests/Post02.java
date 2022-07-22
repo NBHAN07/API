@@ -56,13 +56,20 @@ public class Post02 extends HerOkuAppBaseUrl {
         Map<String, Object> expectedDataMap = expectedData.expectedDataSetUp("John","Doe",11111,true,bookingdatesMap);
 
         //3. send post request and get response
-        Response response = given().spec(spec).contentType(ContentType.JSON).when().post("/{first}");
+        Response response = given().spec(spec).contentType(ContentType.JSON).body(expectedDataMap).when().post("/{first}");
         response.prettyPrint();
 
         //4. do assertion
         Map <String,Object> actualDataMap=response.as(HashMap.class);
 
-        assertEquals(expectedDataMap.get(),actualDataMap.get());
+        assertEquals(200,response.statusCode());
+        assertEquals(expectedDataMap.get("firstname"),((Map)actualDataMap.get("booking")).get("firstname"));
+        assertEquals(expectedDataMap.get("lastname"), ((Map)actualDataMap.get("booking")).get("lastname") );
+        assertEquals(expectedDataMap.get("totalprice"),((Map)actualDataMap.get("booking")).get("totalprice"));
+        assertEquals(expectedDataMap.get("depositpaid"),((Map)actualDataMap.get("booking")).get("depositpaid"));
+
+        assertEquals(bookingdatesMap.get("checkin"), ((Map) ((Map) actualDataMap.get("booking")).get("bookingdates")).get("checkin"));
+        assertEquals(bookingdatesMap.get("checkout"), ((Map) ((Map) actualDataMap.get("booking")).get("bookingdates")).get("checkout"));
 
 
 
