@@ -52,22 +52,7 @@ public class Put01 extends JsonPlaceHolderBaseUrl {
      assertEquals(expectedDataMap.get("title"), actualDataMap.get("title"));
      assertEquals(expectedDataMap.get("completed"), actualDataMap.get("completed"));
 
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
